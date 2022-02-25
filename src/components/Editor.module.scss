@@ -67,11 +67,12 @@
 .toolsContainer {
     @include flexStyle;
     scroll-snap-align: center;
-    margin: 50px 20px;
+    margin: 50px 20px 200px;
 }
 
 .radiusContainer {
     flex-direction: column;
+    margin-top: 100px;
 }
 
 .rangeForm {
@@ -176,6 +177,7 @@
     }
 
     .rangeContent {
+        
         label {
             font-size: 0.8rem !important;
         }
