@@ -41,7 +41,7 @@
 
 .resetButton {
     @include flexStyle;
-    margin: 40px 5px 0 0;
+    margin: 40px -7px 0 0;
     scroll-snap-align: center;
 
     button {
