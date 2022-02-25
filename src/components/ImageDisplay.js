@@ -71,8 +71,7 @@ const ImageDisplay = ({ dark }) => {
                 link.download = 'my-image.png';
                 link.href = dataUrl;
                 link.click();
-                document.styleSheets["https://fonts.googleapis.com/css2?family=Spline+Sans&display=swap" ].cssRules
-            });
+              });
     }
 
     return (
