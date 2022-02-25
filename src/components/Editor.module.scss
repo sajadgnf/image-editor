@@ -35,26 +35,26 @@
     }
 }
 
-.settingIcon{
+.settingIcon {
     font-size: 22px;
 }
 
-.resetButton{ 
+.resetButton {
     @include flexStyle;
     margin: 30px 0;
     scroll-snap-align: center;
 
-button{
-    @include btnStyle;
-    background-color: rgb(59, 150, 145);
-    color: #fff;
-    padding: 10px 20px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-align: center;
-    width: 200px;
-    font-size: 1rem;
-}
+    button {
+        @include btnStyle;
+        background-color: rgb(59, 150, 145);
+        color: #fff;
+        padding: 10px 20px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-align: center;
+        width: 200px;
+        font-size: 1rem;
+    }
 }
 
 .settingContainer {
@@ -70,23 +70,30 @@ button{
     margin: 50px 20px;
 }
 
-.radiusContainer{
+.radiusContainer {
     flex-direction: column;
 }
 
 .rangeForm {
-    position: relative;
+    text-align: center;
+    
+    .rangeContent {
+        @include flexStyle;
+        justify-content: space-between;
 
-    label {
-        font-weight: bold;
-        font-size: 0.8rem;
-        letter-spacing: .5px;
+        label {
+            font-weight: bold;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        button {
+            @include btnStyle;
+        }
     }
+
     span {
         font-size: 0.8rem;
-        position: absolute;
-        top: 3px;
-        left: 100px;
     }
     .degree {
         left: 88px;
@@ -136,20 +143,19 @@ button{
     font-size: 1.3rem;
 }
 
-
 @media (min-width: 720px) {
     .editorContainer {
         grid-column: span 1;
         margin: 0 2rem 0 0;
         height: 85vh;
     }
-    
+
     .radiusContainer {
         margin: 0;
     }
 
     .toolsContainer {
-        margin: 0 40px;
+        margin: 40px;
     }
 
     .toolsIcon,
@@ -157,29 +163,18 @@ button{
         display: flex;
     }
 
-    .resetButton{
+    .resetButton {
         margin-top: 0;
 
         button {
             padding: 6px 20px;
             width: 100px;
-            font-size: .8rem;
+            font-size: 0.8rem;
         }
     }
 
     .settingContainer {
         display: block;
-    }
-
-    .rangeForm {
-        @include flexStyle;
-        flex-direction: column;
-
-        label,
-        span {
-            font-size: 0.9rem;
-            position: static;
-        }
     }
 
     .flipButtons {

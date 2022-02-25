@@ -14,7 +14,7 @@ import { CgEditFlipH, CgEditFlipV } from "react-icons/cg"
 
 const Editor = ({ dark }) => {
 
-    const { state, dispatch } = useContext(editorContext)
+    const { state, dispatch, initialState } = useContext(editorContext)
 
     const [range, setRange] = useState({
         radius: 0,
@@ -31,16 +31,37 @@ const Editor = ({ dark }) => {
         sepia: 0
     })
 
+    // get the inputs changes 
+    const rangeHandler = event => {
 
-    const RangeHandler = event => {
         setRange({
             ...range,
             [event.target.name]: event.target.value
         })
 
-        dispatch({ type: event.target.name.toUpperCase(), payload: (event.target.value) })
+        dispatch({
+            type: event.target.name.toUpperCase(),
+            payload: event.target.value
+        })
     }
 
+    // undo the change for each input
+    const undoHandler = event => {
+        event.preventDefault()
+        const name = event.currentTarget.parentNode.nextElementSibling.name
+
+        setRange({
+            ...range,
+            [name]: initialState[name]
+        })
+
+        dispatch({
+            type: name.toUpperCase(),
+            payload: initialState[name]
+        })
+    }
+
+    // image change scale handle
     const scaleHandler = event => {
 
         const button = event.currentTarget.dataset.name
@@ -54,6 +75,7 @@ const Editor = ({ dark }) => {
 
     }
 
+    // render page after restart 
     useEffect(() => {
         if (state.reset) {
             setRange({ ...state })
@@ -79,6 +101,8 @@ const Editor = ({ dark }) => {
 
             {/* radius */}
             <div>
+
+                {/* top line */}
                 <div className={styles.toolsIcon}>
                     <BsTools />
                     <span className={styles.line}></span>
@@ -88,19 +112,25 @@ const Editor = ({ dark }) => {
                     <button onClick={() => dispatch({ type: "RESET" })}>Reset</button>
                 </div>
 
+                {/* radius input */}
                 <div className={styles.radiusContainer}>
                     <form className={styles.rangeForm}>
-                        <label htmlFor="">Radius</label>
+                        <div className={styles.rangeContent}>
+                            <label htmlFor="">Radius</label>
+                            <button className={styles.undo} onClick={event => undoHandler(event)}><ImUndo2 /></button>
+                        </div>
+
                         <input
                             name="radius"
                             value={radius}
                             max='50'
                             type="range"
-                            onChange={event => RangeHandler(event)}
+                            onChange={event => rangeHandler(event)}
                             className={styles.range}
                         />
                         <span>{radius}%</span>
                     </form>
+
                     <div className={styles.flipButtons}>
                         <button
                             data-name='scaleX'
@@ -118,156 +148,177 @@ const Editor = ({ dark }) => {
 
             {/* setting */}
             <div className={styles.settingContainer}>
+
+                {/* top line */}
                 <div className={styles.settingIcon}>
                     <BiSlider />
                     <span className={styles.line}></span>
                 </div>
 
+                {/* range inputs */}
                 <div className={styles.toolsContainer}>
                     <form className={styles.rangeForm}>
-                        <label htmlFor="">Brightness</label>
+                        <div className={styles.rangeContent}>
+                            <label htmlFor="">Brightness</label>
+                            <button onClick={event => undoHandler(event)}><ImUndo2 /></button>
+                        </div>
+
                         <input
                             name="brightness"
                             value={brightness}
                             type="range"
-                            onChange={event => RangeHandler(event)}
+                            onChange={event => rangeHandler(event)}
                             className={styles.range}
                         />
                         <span>{brightness}%</span>
-                        <div className={styles.flipButtons}>
-                        </div>
                     </form>
                 </div>
 
                 <div className={styles.toolsContainer}>
                     <form className={styles.rangeForm}>
-                        <label htmlFor="">Blur</label>
+                        <div className={styles.rangeContent}>
+                            <label htmlFor="">Blur</label>
+                            <button onClick={event => undoHandler(event)}><ImUndo2 /></button>
+                        </div>
+
                         <input
                             name='blur'
                             value={blur}
                             max='10'
                             type="range"
-                            onChange={event => RangeHandler(event)}
+                            onChange={event => rangeHandler(event)}
                             className={styles.range}
                         />
                         <span>{blur}px</span>
-                        <div className={styles.flipButtons}>
-                        </div>
                     </form>
                 </div>
 
                 <div className={styles.toolsContainer}>
                     <form className={styles.rangeForm}>
-                        <label htmlFor="">Contrast</label>
+                        <div className={styles.rangeContent}>
+                            <label htmlFor="">Contrast</label>
+                            <button onClick={event => undoHandler(event)}><ImUndo2 /></button>
+                        </div>
+
                         <input
                             name="contrast"
                             value={contrast}
                             max="400"
                             type="range"
-                            onChange={event => RangeHandler(event)}
+                            onChange={event => rangeHandler(event)}
                             className={styles.range}
                         />
                         <span>{contrast}%</span>
-                        <div className={styles.flipButtons}>
-                        </div>
                     </form>
                 </div>
 
                 <div className={styles.toolsContainer}>
                     <form className={styles.rangeForm}>
-                        <label htmlFor="">Grayscale</label>
+                        <div className={styles.rangeContent}>
+                            <label htmlFor="">Grayscale</label>
+                            <button onClick={event => undoHandler(event)}><ImUndo2 /></button>
+                        </div>
+
                         <input
                             name="grayscale"
                             value={grayscale}
                             type="range"
-                            onChange={event => RangeHandler(event)}
+                            onChange={event => rangeHandler(event)}
                             className={styles.range}
                         />
                         <span>{grayscale}%</span>
-                        <div className={styles.flipButtons}>
-                        </div>
                     </form>
                 </div>
 
                 <div className={styles.toolsContainer}>
                     <form className={styles.rangeForm}>
-                        <label htmlFor="">Hue</label>
+                        <div className={styles.rangeContent}>
+                            <label htmlFor="">Hue</label>
+                            <button onClick={event => undoHandler(event)}><ImUndo2 /></button>
+                        </div>
+
                         <input
                             name="hue"
                             value={hue}
                             max="400"
                             type="range"
-                            onChange={event => RangeHandler(event)}
+                            onChange={event => rangeHandler(event)}
                             className={styles.range}
                         />
                         <span className={styles.degree}>{hue} deg</span>
-                        <div className={styles.flipButtons}>
-                        </div>
                     </form>
                 </div>
 
                 <div className={styles.toolsContainer}>
                     <form className={styles.rangeForm}>
-                        <label htmlFor="">Invert</label>
+                        <div className={styles.rangeContent}>
+                            <label htmlFor="">Invert</label>
+                            <button onClick={event => undoHandler(event)}><ImUndo2 /></button>
+                        </div>
+
                         <input
                             name="invert"
                             value={invert}
                             type="range"
-                            onChange={event => RangeHandler(event)}
+                            onChange={event => rangeHandler(event)}
                             className={styles.range}
                         />
                         <span>{invert}%</span>
-                        <div className={styles.flipButtons}>
-                        </div>
                     </form>
                 </div>
 
                 <div className={styles.toolsContainer}>
                     <form className={styles.rangeForm}>
-                        <label htmlFor="">Opacity</label>
+                        <div className={styles.rangeContent}>
+                            <label htmlFor="">Opacity</label>
+                            <button onClick={event => undoHandler(event)}><ImUndo2 /></button>
+                        </div>
+
                         <input
                             name="opacity"
                             value={opacity}
                             type="range"
-                            onChange={event => RangeHandler(event)}
+                            onChange={event => rangeHandler(event)}
                             className={styles.range}
                         />
                         <span>{opacity}%</span>
-                        <div className={styles.flipButtons}>
-                        </div>
                     </form>
                 </div>
 
                 <div className={styles.toolsContainer}>
                     <form className={styles.rangeForm}>
-                        <label htmlFor="">Saturation</label>
+                        <div className={styles.rangeContent}>
+                            <label htmlFor="">Saturation</label>
+                            <button onClick={event => undoHandler(event)}><ImUndo2 /></button>
+                        </div>
+
                         <input
                             name="saturation"
                             value={saturation}
                             max="300"
                             type="range"
-                            onChange={event => RangeHandler(event)}
+                            onChange={event => rangeHandler(event)}
                             className={styles.range}
                         />
                         <span>{saturation}%</span>
-                        <div className={styles.flipButtons}>
-                        </div>
                     </form>
                 </div>
 
                 <div className={styles.toolsContainer}>
                     <form className={styles.rangeForm}>
-                        <label htmlFor="">Sepia</label>
+                        <div className={styles.rangeContent}>
+                            <label htmlFor="">Sepia</label>
+                            <button onClick={event => undoHandler(event)}><ImUndo2 /></button>
+                        </div>
+
                         <input
                             name="sepia"
                             value={sepia}
                             type="range"
-                            onChange={event => RangeHandler(event)}
+                            onChange={event => rangeHandler(event)}
                             className={styles.range}
                         />
                         <span>{sepia}%</span>
-                        <div className={styles.flipButtons}>
-                        </div>
                     </form>
                 </div>
             </div>

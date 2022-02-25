@@ -119,7 +119,7 @@ const EditorContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     return (
-        <editorContext.Provider value={{ state, dispatch }}>
+        <editorContext.Provider value={{ state, dispatch, initialState }}>
             {children}
         </ editorContext.Provider>
     )

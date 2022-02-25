@@ -1,4 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
+import domtoimage from "dom-to-image"
 
 // styles
 import styles from "./ImageDisplay.module.scss"
@@ -12,7 +13,7 @@ import { editorContext } from '../context/EditorContextProvider';
 
 const ImageDisplay = ({ dark }) => {
 
-    const { state, dispatch } = useContext(editorContext)
+    const { state } = useContext(editorContext)
     const [uploadedImage, setUploadedImage] = useState(null)
     const btnRef = useRef()
     const imageRef = useRef()
@@ -29,16 +30,26 @@ const ImageDisplay = ({ dark }) => {
         btnRef.current.value = ""
     }
 
-
-    // style image
-    const { radius, brightness, blur, contrast, grayscale, hue, invert, opacity, saturation, sepia, scaleX, scaleY } = state
+    // add changes to image
+    const { radius,
+        brightness,
+        blur,
+        contrast,
+        grayscale,
+        hue,
+        invert,
+        opacity,
+        saturation,
+        sepia,
+        scaleX,
+        scaleY
+    } = state
 
     if (imageRef.current) {
         imageRef.current.style.borderRadius = `${radius}%`
 
-        imageRef.current.style.transform = `scale(${scaleY}) scaleX(${scaleX})`
-        // imageRef.current.style.transform = ``
-        
+        imageRef.current.style.transform = `scaleY(${scaleY}) scaleX(${scaleX})`
+
         imageRef.current.style.filter = `
         brightness(${brightness * 2}%) 
         blur(${blur}px) 
@@ -52,6 +63,18 @@ const ImageDisplay = ({ dark }) => {
         `
     }
 
+    const downloadHandler = () => {
+        domtoimage.toPng(imageRef.current)
+            .then(dataUrl => {
+                let link = document.createElement('a');
+                link.setAttribute('crossorigin', "anonymous")
+                link.download = 'my-image.png';
+                link.href = dataUrl;
+                link.click();
+                document.styleSheets["https://fonts.googleapis.com/css2?family=Spline+Sans&display=swap" ].cssRules
+            });
+    }
+
     return (
         <div className={`${styles.imageDisplay} ${dark ? styles.darkImageDisplay : ''}`}>
             <div className={styles.imageContainer}>
@@ -60,12 +83,13 @@ const ImageDisplay = ({ dark }) => {
                     <img ref={imageRef} className={styles.image} src={uploadedImage} alt="image" />
                 }
             </div>
+
             <div className={`${styles.icons} ${dark ? styles.darkIcons : ''}`}>
                 <label className={styles.uploadIcon} htmlFor="image_input">
                     <BsImageFill />
                     <input ref={btnRef} className={styles.imageInput} type="file" id='image_input' accept='image/png, iage/jpg' onChange={event => imageHandler(event)} />
                 </label>
-                <ImDownload />
+                <ImDownload onClick={downloadHandler} />
                 <BsFillTrashFill onClick={removeHandler} />
             </div>
         </div>
