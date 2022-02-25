@@ -76,27 +76,25 @@
 
 .rangeForm {
     text-align: center;
-    
+
     .rangeContent {
         @include flexStyle;
         justify-content: space-between;
 
         label {
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             letter-spacing: 0.5px;
         }
 
         button {
             @include btnStyle;
+            font-size: 1.2rem;
         }
     }
 
     span {
         font-size: 0.8rem;
-    }
-    .degree {
-        left: 88px;
     }
 
     .range {
@@ -104,7 +102,7 @@
         -webkit-appearance: none;
         background-color: $silver;
         opacity: 0.7;
-        width: 120px;
+        width: 220px;
         margin: 10px 0;
         outline: none;
         border-radius: 5px;
@@ -175,6 +173,20 @@
 
     .settingContainer {
         display: block;
+    }
+
+    .rangeContent {
+        label {
+            font-size: 0.8rem !important;
+        }
+
+        button {
+            font-size: 1rem !important;
+        }
+    }
+
+    .range {
+        width: 120px !important;
     }
 
     .flipButtons {
