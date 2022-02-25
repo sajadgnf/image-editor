@@ -1,0 +1,15 @@
+@mixin flexStyle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin btnStyle {
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+

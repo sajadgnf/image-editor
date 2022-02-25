@@ -1,0 +1,90 @@
+@import "../sass/functions";
+@import "../sass/variables";
+
+.imageDisplay {
+    grid-column: span 6;
+    background-color: $lightColor;
+    margin: 1rem 1rem 0;
+    height: 58vh;
+    border-radius: 10px;
+    padding: 1rem;
+    @include flexStyle;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+}
+
+.darkImageDisplay {
+    background-color: $darkColor;
+}
+
+.imageContainer {
+    @include flexStyle;
+    margin: auto;
+}
+
+.image {
+    width: 100%;
+}
+
+.icons {
+    text-align: center;
+}
+
+.imageInput {
+    display: none;
+}
+
+.icons svg {
+    margin: 0 8px;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.darkIcons * {
+    color: $lightColor;
+}
+
+@media (min-width: 540px) {
+    .image {
+        width: 500px;
+    }
+}
+
+@media (min-width: 720px) {
+    .imageDisplay {
+        flex-direction: row;
+        grid-column: span 5;
+        margin: 0 0 0 2rem;
+        height: auto;
+    }
+
+    .image {
+        width: 350px;
+        margin-right: 20px;
+    }
+
+    .icons {
+        @include flexStyle;
+        flex-direction: column;
+    }
+
+    .icons svg {
+        margin: 8px 0;
+    }
+
+    .uploadIcon svg {
+        margin: 0;
+    }
+}
+
+@media (min-width: 920px) {
+    .image {
+        width: 550px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .image {
+        width: 800px;
+    }
+}

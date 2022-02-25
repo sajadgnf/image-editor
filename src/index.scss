@@ -1,0 +1,32 @@
+@import "./sass/functions";
+@import "./sass/variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #333;
+}
+
+body {
+  font-family: "Spline Sans", sans-serif;
+  background-color: rgb(56, 63, 85);
+}
+
+.app {
+  display: grid;
+  grid-gap: 1rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scroll-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+  border-radius: 4px;
+}
