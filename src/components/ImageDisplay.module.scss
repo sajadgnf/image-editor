@@ -21,6 +21,19 @@
     @include flexStyle;
     margin: auto;
     height: 90%;
+    width: 90%;
+}
+
+.dropContainer {
+    @include flexStyle;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border: 1px silver dashed;
+    svg {
+        margin-top: 10px;
+        font-size: 3rem;
+    }
 }
 
 .image {
@@ -58,7 +71,7 @@
         flex-direction: row;
         grid-column: span 5;
         margin: 0 0 0 2rem;
-        height: auto;
+        height: 85vh;
     }
 
     .image {
