@@ -96,10 +96,10 @@ const ImageDisplay = ({ dark }) => {
     return (
         <div className={`${styles.imageDisplay} ${dark ? styles.darkImageDisplay : ''}`}>
 
-            <div className={styles.imageContainer} {...getRootProps()}>
+            <div className={styles.imageContainer} >
                 {
                     window.innerWidth > 720 && !file.length && !uploadedImage &&
-                    <div className={styles.dropContainer}>
+                    <div className={styles.dropContainer} {...getRootProps()}>
                         <input {...getInputProps()} />
                         <p>Drop Image Here</p>
                         <BsPlusLg />
