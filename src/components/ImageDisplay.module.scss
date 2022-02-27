@@ -17,13 +17,16 @@
     background-color: $darkColor;
 }
 
+.darkImageDisplay * {
+    color: $lightColor;
+}
+
 .imageContainer {
     @include flexStyle;
     margin: auto;
     height: 90%;
     width: 90%;
 }
-
 
 .dropContainer {
     @include flexStyle;

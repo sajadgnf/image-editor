@@ -70,19 +70,19 @@
     border-radius: 50px;
     -webkit-transition: 0.4s;
     transition: 0.4s;
-}
 
-.slider::before {
-    content: "";
-    position: absolute;
-    left: 2px;
-    bottom: 2px;
-    height: 10px;
-    width: 10px;
-    background-color: #fff;
-    border-radius: 50px;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        bottom: 2px;
+        height: 10px;
+        width: 10px;
+        background-color: #fff;
+        border-radius: 50px;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+    }
 }
 
 .switch input:checked + .slider {

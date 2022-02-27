@@ -92,7 +92,7 @@ const ImageDisplay = ({ dark }) => {
                 link.click();
             });
     }
-    console.log(window.innerWidth);
+
     return (
         <div className={`${styles.imageDisplay} ${dark ? styles.darkImageDisplay : ''}`}>
 
@@ -111,10 +111,10 @@ const ImageDisplay = ({ dark }) => {
                             ref={imageRef}
                             className={styles.image}
                             src={
-                                uploadedImage && uploadedImage ||
-                                file.length && file[0].preview
+                                (uploadedImage && uploadedImage) ||
+                                (file.length && file[0].preview)
                             }
-                            alt="image"
+                            alt=""
                         /> :
                         null
                 }

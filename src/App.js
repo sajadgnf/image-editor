@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // componenets
 import Navbar from "./components/Navbar";
@@ -12,10 +12,13 @@ import EditorContextProver from "./context/EditorContextProvider"
 // styles
 import "./index.scss"
 
-function App() {
+const App = () => {
 
+  const [dark, setDark] = useState(null)
 
-  const [dark, setDark] = useState(false)
+  useEffect(() => {
+    setDark(JSON.parse(localStorage.getItem("mood")))
+  }, [])
 
   return (
     <div className="app">
